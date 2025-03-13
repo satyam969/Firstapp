@@ -1,4 +1,4 @@
-import React, {useState} from 'react-native';
+import React, {useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -37,7 +37,9 @@ const App = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView className="flex-1" style={[styles.container, {backgroundColor: '#fff'}]}>
+    <SafeAreaView
+      className="flex-1"
+      style={[styles.container, {backgroundColor: '#fff'}]}>
       <Image style={styles.image} source={loginurl} />
 
       <TextInput
