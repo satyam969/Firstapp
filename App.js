@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import Profile from './src/screens/profile';
 import Authentication from './src/screens/Authenticaton';
 
-const App = () => {
+const App = ({ navigation }) => {
   const [info, setInfo] = useState(0);
-
 
   const user = {
     name: 'John Doe',
@@ -15,21 +14,34 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       if (user.role === 'student') {
-        setInfo(0);
+        setInfo(1); // Redirect to Profile if student
+      } else {
+        setInfo(0); // Stay on same page otherwise
       }
     }, 2000);
   }, []);
-  if(info===0)
+
+  if (info === 0 || !user) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Hello User, Please Wait</Text>
-        <Authentication />
+        {info ? (
+          <Text style={styles.text}>Proceed To Login</Text>
+        ) : (
+          <Text style={styles.text}>Hello User, Please Wait</Text>
+        )}
+       <Text>{info && <Button
+          title="Sign Up"
+          onPress={() => navigation.navigate('Authentication')}
+        />}</Text>
       </View>
     );
+  }
+
   if (info === 1 && user.role === 'student') {
     return <Profile />;
   }
 
+  return null;
 };
 
 const styles = StyleSheet.create({
@@ -48,4 +60,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-

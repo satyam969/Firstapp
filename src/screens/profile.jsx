@@ -2,15 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, Image, Button } from 'react-native';  
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Import Tab Navigator  
 import img from '../../assests/loginpage2.jpg';  
-
-
-const ExamResults = () => (  
-  <View style={styles.container}>  
-    <Text style={styles.title}>Exam Results</Text>  
-    <Text>No results available.</Text>  
- 
-  </View>  
-);  
+import ExamsDetail from './examsdetail'; 
 
 
 const ProfilePage=()=>{
@@ -54,8 +46,9 @@ return(
 
       <Button title="Logout" onPress={() => Alert.alert('Logged out')} />
 
-
+<Text style={{fontSize:26,margin:2,fontWeight: '600'}}>Past Exams</Text>
       <FlatList
+      style={{width:350}}
   data={user.exams || []}
   keyExtractor={(item) => item.id?.toString() || Math.random().toString()}
   renderItem={({ item }) => (
@@ -87,10 +80,10 @@ const Profile = ({ navigation }) => {
   
   return (  
  
-    <Tab.Navigator initialRouteName="ProfilePage" screenOptions={{ headerShown: false }}> 
-      <Tab.Screen name="ProfilePage" component={ProfilePage} />  
+    <Tab.Navigator initialRouteName="ProfilePage" screenOptions={{ headerShown: false, tabBarActiveTintColor: 'blue', }}> 
+      <Tab.Screen      name="ProfilePage" component={ProfilePage}  options={{ tabBarIcon: () => <Text>👤</Text> }} />  
       
-      <Tab.Screen name="Exam Results" component={ExamResults} />  
+      <Tab.Screen iconName = 'book-outline' name="Exams" component={ExamsDetail} options={{ tabBarIcon: () => <Text>📚</Text> }}/>  
     </Tab.Navigator>  
  
   );  
