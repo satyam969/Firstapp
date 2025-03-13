@@ -1,21 +1,35 @@
-import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import Profile from './src/screens/profile';
+import Authentication from './src/screens/Authenticaton';
 
 const App = () => {
-  useEffect(() => {
-    // Check whetehr user is already logged in or not if logged in direct him to home page or direct him to authentication page
-  }, []);
+  const [info, setInfo] = useState(0);
 
-  return React.createElement(
-      View,
-      {style: styles.container},
-      React.createElement(
-        Text,
-        {style: styles.text},
-        'Hello, User! Please Wait..'
-      )
+
+  const user = {
+    name: 'John Doe',
+    role: 'student', // Change this to 'admin' or 'organization' for different behavior
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (user.role === 'student') {
+        setInfo(0);
+      }
+    }, 2000);
+  }, []);
+  if(info===0)
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>Hello User, Please Wait</Text>
+        <Authentication />
+      </View>
     );
+  if (info === 1 && user.role === 'student') {
+    return <Profile />;
+  }
+
 };
 
 const styles = StyleSheet.create({
@@ -34,3 +48,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
