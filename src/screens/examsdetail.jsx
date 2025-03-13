@@ -1,19 +1,11 @@
-import { SafeAreaView } from "react-native"
-
+import {SafeAreaView} from 'react-native';
 
 const examsdetail = () => {
-    
   return (
-  <SafeAreaView>
-<Text>
-      Exam Details Page
- 
-</Text>
+    <SafeAreaView>
+      <Text>Exam Details Page</Text>
+    </SafeAreaView>
+  );
+};
 
-
-  </SafeAreaView>
-
-  )
-}
-
-export default examsdetail
+export default examsdetail;

@@ -1,48 +1,36 @@
 // search.jsx
-import React, { Component, useState } from 'react'
-import { ScrollViewComponent, Text, TextInput, View } from 'react-native'
+import React, {Component, useState} from 'react';
+import {ScrollViewComponent, Text, TextInput, View} from 'react-native';
 
+const search = () => {
+  const [search, setSearch] = useState('');
+  return (
+    <View>
+      <Text> Search Component </Text>
+      {/* Add search functionality */}
+      <TextInput value={search} onChangeText={setSearch}></TextInput>
+      {/* Implement search bar */}
 
- const search=()=> {
-    const [search,setSearch]=useState('')
-    return (
-      <View>
-        <Text> Search Component </Text>
-        {/* Add search functionality */}
-        <TextInput
-        value={search}
-        onChangeText={setSearch}
-        >
+      <ScrollView>
+        {/* Display search results */}
 
-        </TextInput>
-        {/* Implement search bar */}
+        <View>
+          <Text>Search Result 1</Text>
+        </View>
+        <View>
+          <Text>Search Result 2</Text>
+        </View>
 
-        <ScrollView>
-            {/* Display search results */}
+        {/* Add loading state */}
+        {/* Add error handling */}
+        {/* Add pagination */}
+      </ScrollView>
 
-<View>
-    <Text>
-        Search Result 1
-    </Text>
-</View>
-<View>
-    <Text>
-        Search Result 2
-    </Text>
-</View>
+      {/* Implement search results */}
+      {/* Implement pagination */}
+      <Text> textInComponent </Text>
+    </View>
+  );
+};
 
-
-            {/* Add loading state */}
-            {/* Add error handling */}
-            {/* Add pagination */}
-        </ScrollView>
-
-        {/* Implement search results */}
-        {/* Implement pagination */}
-        <Text> textInComponent </Text>
-      </View>
-    )
-  }
-
-
-export default search
+export default search;
