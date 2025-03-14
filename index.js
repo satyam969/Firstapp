@@ -4,9 +4,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+const StudentRoutes=require("./routes/Student.route")
+
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use('/api/students', StudentRoutes);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000; 

@@ -1,7 +1,7 @@
 const express = require('express')
 const router=express.Router();
 
-// Importing controllers
+
 
 const {
   createStudent,
@@ -13,16 +13,16 @@ const {
   googleLoginStudent,
   forgetPasswordStudent,
   resetPasswordStudent,
-} = require("../controllers/studentController");
+} = require("../controller/studentController");
 
 
-// Routes
+
 
 router.post("/register", createStudent);
-router.get("/students", getStudents);
-router.get("/students/:id", getStudentById);
-router.put("/students/:id", updateStudent);
-router.delete("/students/:id", deleteStudent);
+router.get("/", getStudents);
+router.get("/:id", getStudentById);
+router.put("/:id", updateStudent);
+router.delete("/:id", deleteStudent);
 
 router.post("/login", loginStudent);
 
