@@ -14,7 +14,7 @@ const createStudent = async (req, res) => {
 
 const getStudents = async (req, res) => {
     try {
-        const students = await Student.find();
+        const students = await Student.find().select('-password');
         res.json(students);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -23,7 +23,7 @@ const getStudents = async (req, res) => {
 
 const getStudentById = async (req, res) => {
     try {
-        const student = await Student.findById(req.params.id);
+        const student = await Student.findById(req.params.id).select('-password');
         if (!student) return res.status(404).json({ message: 'Student not found' });
         res.json(student);
     } catch (error) {
@@ -33,7 +33,7 @@ const getStudentById = async (req, res) => {
 
 const updateStudent = async (req, res) => {
     try {
-        const student = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const student = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-password');
         if (!student) return res.status(404).json({ message: 'Student not found' });
         res.json(student);
     } catch (error) {
@@ -43,7 +43,7 @@ const updateStudent = async (req, res) => {
 
 const deleteStudent = async (req, res) => {
     try {
-        const student = await Student.findByIdAndDelete(req.params.id);
+        const student = await Student.findByIdAndDelete(req.params.id).select('-password');
         console.log("phuch gya yaha ");
         if (!student) return res.status(404).json({ message: 'Student not found' });
         res.json({ message: 'Student deleted' });
@@ -106,11 +106,9 @@ const resetPasswordStudent = async (req, res) => {
 
 
 
-        const student = await Student.findOne({ _id: decoded.id, resetToken: token });
+        const student = await Student.findOne({ _id: decoded.id });
 
 
-
-        const actstudent=await Student.findOne({ _id: decoded.id});
 
 
         if (!student) {
