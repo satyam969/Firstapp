@@ -5,7 +5,7 @@
 
 
 
-//   // Screen component for the home screen
+  // Screen component for the home screen
 
 
 
