@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollViewComponent } from 'react-native';
-
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
 const Authentication = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-
     <View style={styles.container}>
-   
       <Image source={require('../../assests/loginpage2.jpg')} style={styles.image} />
       <Text style={styles.title}>Welcome to Our App</Text>
-      
+
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -50,38 +47,36 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#FFFFFF',
     padding: 20,
   },
   image: {
-    width: 400,
-    height: 200,
-    marginBottom: 20,
-    borderWidth:2,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    overflow: 'hidden',
+    width: '100%',
+    height: 250,
+    marginBottom: 30,
+    borderRadius: 15,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#333',
   },
   input: {
-    padding: 10,
+    padding: 15,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 10,
-    width:300,
-    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 15,
+    width: '90%',
+    backgroundColor: '#F9F9F9',
   },
   button: {
     backgroundColor: '#6200EE',
-    padding: 10,
-    borderRadius: 5,
-    marginVertical: 5,
-    width: '100%',
+    padding: 15,
+    borderRadius: 8,
+    marginVertical: 10,
+    width: '90%',
     alignItems: 'center',
   },
   googleButton: {
@@ -93,7 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   signupText: {
-    marginTop: 10,
+    marginTop: 15,
     color: '#6200EE',
     fontSize: 16,
   },

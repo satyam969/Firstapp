@@ -22,7 +22,7 @@ const App = () => {
         // if(success)
         setUser('user');
         setRole('student');
-        setAuthenticated(true);
+        setAuthenticated(false);
         //make call to store user details in redux and store refresh  tokein in asyncstorage
 
         // else
