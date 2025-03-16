@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollViewComponent } from 'react-native';
+
 
 const Authentication = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
+
     <View style={styles.container}>
+   
       <Image source={require('../../assests/loginpage2.jpg')} style={styles.image} />
       <Text style={styles.title}>Welcome to Our App</Text>
       
