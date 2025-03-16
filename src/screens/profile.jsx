@@ -4,6 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Imp
 import img from '../../assests/loginpage2.jpg';  
 import ExamsDetail from './examsdetail'; 
 
+const Profile = ({ navigation }) => {  
+  const user = {  
+    name: "John Aditya",  
+    email: "john.doe@example.com",  
+    bio: "Software Developer at XYZ Company",  
+  };  
 
 const ProfilePage=()=>{
 
