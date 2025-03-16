@@ -2,13 +2,18 @@ const express = require('express')
 
 const router=express.Router();
 
+const {   createExam,
+    getExams,
+    getExamById,
+    getExamsByInstitute,
+    updateExam,
+    deleteExam}=require('../controller/examController')
 
-const{CreateExam, DeleteExam,UpdateExam} =require(  '../controllers/examController');
+    router.post('/', createExam)
+    router.get('/', getExams)
+    router.get('/:id', getExamById)
+    router.get('/institute/:id', getExamsByInstitute)
+    router.put('/:id', updateExam)
+    router.delete('/:id', deleteExam)
 
-router.post('/create', CreateExam);
-
-router.delete('/delete/:id', DeleteExam);
-
-router.put('/update/:id', UpdateExam);
-
-module.exports = router;
+    module.exports=router;

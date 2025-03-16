@@ -1,12 +1,19 @@
 const express = require('express')
 const router=express.Router();
 
+const { createMarks,
+    getMarksbyID,
+    updateMarks,
+    deleteMarks}=require('../controller/marksController')
 
-const{Addmarks,updatemarksById} =require('../controllers/marksController')
 
-router.put('/:exam_id/:student_id', updatemarksById)
+router.post('/',createMarks);
 
-router.post('/', Addmarks)
+router.get('/:id/:studentid',getMarksbyID);
+
+router.put('/:id/:studentid',updateMarks);
+
+router.delete('/:id/:studentid',deleteMarks);
 
 module.exports=router;
 
