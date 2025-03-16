@@ -1,4 +1,5 @@
-const Institute=require('../models/Institute.model')
+const Institute=require('../models/Institute.model');
+const Student = require('../models/Student.model');
 const sendEmail = require('../utils/sendEmail');
 const jwt=require('jsonwebtoken');
 
@@ -31,6 +32,17 @@ const   GetInstituteById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+const GetStudentByInstituteId=async(req,res)=>{
+    try{
+        const students = await Student.find({institute:req.params.id});
+      
+        if (!students) return res.status(404).json({ message: 'Institute not found' });
+        res.json(students);
+    } catch(error){
+        res.status(500).json({ message: error.message });
+    }
+}
 
 const UpdateInstitute = async (req, res) => {
     try {
@@ -113,4 +125,4 @@ const resetPasswordInstitute = async (req, res) => {
 };
 
 
-module.exports={CreateInstitute,UpdateInstitute,DeleteInstitute,forgetPasswordInstitute,resetPasswordInstitute,DeleteInstitute,UpdateInstitute,GetInstitutes,LoginInstitute,GetInstituteById}
+module.exports={CreateInstitute,GetStudentByInstituteId,UpdateInstitute,DeleteInstitute,forgetPasswordInstitute,resetPasswordInstitute,DeleteInstitute,UpdateInstitute,GetInstitutes,LoginInstitute,GetInstituteById}

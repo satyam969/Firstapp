@@ -15,14 +15,14 @@ const {
   resetPasswordStudent,
 } = require("../controller/studentController");
 
-
+const { protect, admin }=require('../middleware/AuthMiddleware')
 
 
 router.post("/register", createStudent);
-router.get("/", getStudents);
-router.get("/:id", getStudentById);
-router.put("/:id", updateStudent);
-router.delete("/:id", deleteStudent);
+router.get("/", protect,getStudents);
+router.get("/:id",protect, getStudentById);
+router.put("/:id",protect, updateStudent);
+router.delete("/:id",protect,admin, deleteStudent);
 
 router.post("/login", loginStudent);
 
