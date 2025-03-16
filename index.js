@@ -8,6 +8,7 @@ const StudentRoutes=require("./routes/Student.route")
 const InstituteRoutes=require('./routes/Institute.route')
 const ExamRoutes=require('./routes/Exam.route')
 const MarksRoutes=require('./routes/marks.route')
+const RegisterRoutes=require('./routes/Register.route')
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,8 @@ app.use('/api/institutes', InstituteRoutes);
 app.use('/api/exams', ExamRoutes);
 
 app.use('/api/marks', MarksRoutes);
+
+app.use('/api/register', RegisterRoutes);
 
 const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000; 
