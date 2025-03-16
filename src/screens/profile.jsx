@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 
 const Profile = ({ navigation }) => {  
   const user = {  
-    name: "John Doe",  
+    name: "John Aditya",  
     email: "john.doe@example.com",  
     bio: "Software Developer at XYZ Company",  
   };  
