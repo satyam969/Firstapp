@@ -1,13 +1,11 @@
 const Register = require('../models/Register.model');
 
 function createRegister(req, res) {
-    let { exam, students } = req.body;
+    let { examid, studentid } = req.body;
 
-    if(!students){
-        students=[];
-    }
-    // students is an array 
-    const newRegister = new Register({ exam, students });
+   
+    
+    const newRegister = new Register({ exam:examid, students:studentid });
     newRegister.save()
         .then(register => res.status(201).json(register))
         .catch(err => res.status(500).json({ error: err.message }));
@@ -24,27 +22,7 @@ function getRegisterById(req, res) {
         .catch(err => res.status(500).json({ error: err.message }));
 }
 
-function addStudent(req, res) {
-    const { studentid } = req.body;
-    Register.findByIdAndUpdate(
-        req.params.id,
-        { $push: { students: studentid } },
-        { new: true }
-    )
-    .then(register => res.json(register))
-    .catch(err => res.status(500).json({ error: err.message }));
-}
 
-function removeStudent(req, res) {
-    const { studentid } = req.body;
-    Register.findByIdAndUpdate(
-        req.params.id,
-        { $pull: { students: studentid } },
-        { new: true }
-    )
-    .then(register => res.json(register))
-    .catch(err => res.status(500).json({ error: err.message }));
-}
 
 function deleteRegister(req, res) {
     Register.findByIdAndDelete(req.params.id)
@@ -56,11 +34,12 @@ function deleteRegister(req, res) {
 }
 
 function getStudentsByExamId(req, res) {
-    Register.findOne({ exam: req.params.examid })
+    Register.find({ exam: req.params.examid })
         .populate('students')
-        .then(register => {
-            if (!register) return res.status(404).json({ message: 'No students found for this exam' });
-            res.json(register.students);
+        .then(registers => {
+            if (!registers.length) return res.status(404).json({ message: 'No students found for this exam' });
+            const students = registers.map(register => register.students);
+            res.json(students);
         })
         .catch(err => res.status(500).json({ error: err.message }));
 }
@@ -69,6 +48,7 @@ function getExamsByStudentId(req, res) {
     Register.find({ students: req.params.studentid })
         .populate('exam')
         .then(registers => {
+            console.log(registers);
             if (!registers.length) return res.status(404).json({ message: 'No exams found for this student' });
             const exams = registers.map(register => register.exam);
             res.json(exams);
@@ -76,12 +56,26 @@ function getExamsByStudentId(req, res) {
         .catch(err => res.status(500).json({ error: err.message }));
 }
 
+
+function DeleteRegistrationByExamStudent(req, res) {
+    Register.findOneAndDelete({ exam: req.params.examid, students: req.params.studentid })
+        .then((result) => {
+            if (result) {
+                res.status(200).json({ message: 'Registration Deleted Successfully' });
+            } else {
+                res.status(404).json({ error: 'No matching registration found' });
+            }
+        })
+        .catch(err => res.status(500).json({ error: err.message }));
+}
+
+
 module.exports = {
     createRegister,
     getRegisterById,
-    addStudent,
-    removeStudent,
+   
     deleteRegister,
     getStudentsByExamId,
-    getExamsByStudentId
+    getExamsByStudentId,
+    DeleteRegistrationByExamStudent
 };
