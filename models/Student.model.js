@@ -24,7 +24,7 @@ studentSchema.pre('save', async function (next) {
 
 
 studentSchema.methods.generateToken = function () {
-  return jwt.sign({ id: this._id, mail: this.mail }, process.env.JWT_SECRET, { expiresIn: '10d' })
+  return jwt.sign({ id: this._id, mail: this.mail,role:"Student" }, process.env.JWT_SECRET, { expiresIn: '10d' })
 }
 
 studentSchema.methods.comparePassword = async function (enteredPassword) {

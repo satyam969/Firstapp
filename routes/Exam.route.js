@@ -8,13 +8,13 @@ const {   createExam,
     getExamsByInstitute,
     updateExam,
     deleteExam}=require('../controller/examController');
-const { protect, admin } = require('../middleware/AuthMiddleware');
+const { protect, admin, protectStudent } = require('../middleware/AuthMiddleware');
 
-    router.post('/',admin,protect, createExam)
-    router.get('/',protect, getExams)
-    router.get('/:id',protect, getExamById)
-    router.get('/institute/:id',protect, getExamsByInstitute)
-    router.put('/:id',protect, updateExam)
-    router.delete('/:id', protect,deleteExam)
+    router.post('/',protect,admin, createExam)
+    router.get('/',protectStudent, getExams)
+    router.get('/:id',protectStudent, getExamById)
+    router.get('/institute/:id',protectStudent, getExamsByInstitute)
+    router.put('/:id',protect,admin, updateExam)
+    router.delete('/:id',protect,admin,deleteExam)
 
     module.exports=router;

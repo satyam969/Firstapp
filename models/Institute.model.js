@@ -21,7 +21,7 @@ instituteSchema.pre('save', async function (next) {
 
 
 instituteSchema.methods.generateToken = function () {
-  return jwt.sign({ id: this._id, mail: this.mail }, process.env.JWT_SECRET, { expiresIn: '10d' })
+  return jwt.sign({ id: this._id, mail: this.mail,role:"Institute" }, process.env.JWT_SECRET, { expiresIn: '10d' })
 }
 
 instituteSchema.methods.comparePassword = async function (enteredPassword) {

@@ -13,16 +13,16 @@ const {
     GetStudentByInstituteId
 } = require('../controller/instituteController');
 
-const { protect, admin } = require('../middleware/AuthMiddleware');
+const { protect, admin, protectStudent, protectInstitute } = require('../middleware/AuthMiddleware');
 
 router.post('/', CreateInstitute);
-router.put('/:id',protect, UpdateInstitute);
+router.put('/:id',protectInstitute, UpdateInstitute);
 router.delete('/:id',protect,admin, DeleteInstitute);
 router.post('/forget-password', forgetPasswordInstitute);
 router.post('/reset-password/:token', resetPasswordInstitute);
-router.get('/',protect,admin, GetInstitutes);
-router.get('/:id',protect, GetInstituteById);
+router.get('/',protectStudent, GetInstitutes);
+router.get('/:id',protectStudent, GetInstituteById);
 router.post('/login', LoginInstitute);
-router.get('/students/:id',protect,GetStudentByInstituteId);
+router.get('/students/:id',protectInstitute,GetStudentByInstituteId);
 
 module.exports = router;

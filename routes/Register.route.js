@@ -12,7 +12,7 @@ const {
     getStudentsByExamId,DeleteRegistrationByExamStudent
 }=require('../controller/registerController');
 
-const { protect, admin } = require('../middleware/AuthMiddleware');
+const { protect, admin, protectStudent } = require('../middleware/AuthMiddleware');
 
 router.get('/students/:examid',protect,getStudentsByExamId)
 
@@ -20,7 +20,7 @@ router.get('/exams/:studentid',protect,getExamsByStudentId)
 
 
 
-router.post('/',protect,createRegister)
+router.post('/',protectStudent,createRegister)
 
 router.get('/:id',protect,getRegisterById)
 

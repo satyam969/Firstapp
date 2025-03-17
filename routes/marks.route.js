@@ -5,12 +5,12 @@ const { createMarks,
     getMarksbyID,
     updateMarks,
     deleteMarks}=require('../controller/marksController');
-const { protect, admin } = require('../middleware/AuthMiddleware');
+const { protect, admin, protectStudent } = require('../middleware/AuthMiddleware');
 
 
-router.post('/',createMarks);
+router.post('/',protect,admin,createMarks);
 
-router.get('/:id/:studentid',protect,getMarksbyID);
+router.get('/:id/:studentid',protectStudent,getMarksbyID);
 
 router.put('/:id/:studentid',protect,admin,updateMarks);
 
