@@ -20,7 +20,7 @@ router.put('/:id',protectInstitute, UpdateInstitute);
 router.delete('/:id',protect,admin, DeleteInstitute);
 router.post('/forget-password', forgetPasswordInstitute);
 router.post('/reset-password/:token', resetPasswordInstitute);
-router.get('/',protectStudent, GetInstitutes);
+router.get('/', GetInstitutes);
 router.get('/:id',protectStudent, GetInstituteById);
 router.post('/login', LoginInstitute);
 router.get('/students/:id',protectInstitute,GetStudentByInstituteId);
