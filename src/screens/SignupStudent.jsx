@@ -84,8 +84,10 @@ const Signup = ({navigation}) => {
         }
     };
 
+
     return (
         <View style={styles.container}>
+         
             <TextInput style={styles.input} placeholder="Name" value={name} onChangeText={setName} />
             <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
             <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
