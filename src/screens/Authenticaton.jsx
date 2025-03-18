@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
-const Authentication = () => {
+const Authentication = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const URI = "http://10.0.2.2:5000";
@@ -40,6 +40,14 @@ const Authentication = () => {
           console.error('Error:', error.message);
       }
   };
+
+  const handleStudentSignup = () => {
+    navigation.navigate('StudentRegister');
+  };
+
+  const handleInstituteSignup = () => {
+    navigation.navigate('InstituteRegister');
+  };
   
   
 
@@ -73,12 +81,18 @@ const Authentication = () => {
         <Text style={styles.buttonText}>Login with Google</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <Text style={styles.signupText}>Don't have an account? Sign Up</Text>
+      <TouchableOpacity style={[styles.button, styles.signupButton]} onPress={handleStudentSignup}>
+        <Text style={styles.buttonText}>Sign Up as Student</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button, styles.signupButton]} onPress={handleInstituteSignup}>
+        <Text style={styles.buttonText}>Sign Up as Institute</Text>
       </TouchableOpacity>
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   container: {

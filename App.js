@@ -8,6 +8,8 @@ import InstituteHome from './src/screens/InstituteHome';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Signup from './src/screens/SignupStudent';
+import Signupinstitute from './src/screens/Signupinstitute';
 
 
 const App = () => {
@@ -28,9 +30,9 @@ const App = () => {
         // if(success)
         setUser('user');
         setRole(role);
-        
+
         if(token)
-        setAuthenticated(true);
+        setAuthenticated(false);
     
         //make call to store user details in redux and store refresh  tokein in asyncstorage
 
@@ -49,7 +51,11 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {!authenticated ? (
-          <Stack.Screen name="Authentication" component={Authentication} />
+           <>
+           <Stack.Screen name="Authentication" component={Authentication} />
+           <Stack.Screen name="StudentRegister" component={Signup} />
+           <Stack.Screen name="InstituteRegister" component={Signupinstitute} />
+         </>
         ) : role === 'student' ? (
           <Stack.Screen name="StudentHome" component={StudentHome} />
         ) : (
