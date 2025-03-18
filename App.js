@@ -7,6 +7,8 @@ import StudentHome from './src/screens/StudentHome';
 import InstituteHome from './src/screens/InstituteHome';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const App = () => {
   const [info, setInfo] = useState(0);
@@ -19,10 +21,17 @@ const App = () => {
     async function checkLoginStatus() {
       try {
         // const data = await fetch('/api/user');
+        const token =await AsyncStorage.getItem('authToken')
+        const role=await AsyncStorage.getItem('role')
+
+        console.log(token,role);
         // if(success)
         setUser('user');
-        setRole('student');
-        setAuthenticated(false);
+        setRole(role);
+        
+        if(token)
+        setAuthenticated(true);
+    
         //make call to store user details in redux and store refresh  tokein in asyncstorage
 
         // else

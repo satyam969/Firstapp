@@ -1,9 +1,47 @@
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
 const Authentication = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const URI = "http://10.0.2.2:5000";
+
+
+  const handleSubmit = async () => {
+      try {
+          const response = await fetch(`${URI}/api/students/login`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  mail: email,
+                  password: password,
+              }),
+          });
+  
+       const data = await response.json();
+
+     
+
+          console.log(data);
+  
+          if (response?.ok) {
+              await AsyncStorage.setItem('authToken', data.token); 
+              await AsyncStorage.setItem('role',data.role);
+              // student
+              console.log('Login successful!');
+          } else {
+              console.log("token not found");  
+          }
+  
+      } catch (error) {
+          console.error('Error:', error.message);
+      }
+  };
+  
+  
 
   return (
     <View style={styles.container}>
@@ -27,8 +65,8 @@ const Authentication = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText} >Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, styles.googleButton]}>
