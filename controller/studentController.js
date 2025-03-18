@@ -54,10 +54,11 @@ const deleteStudent = async (req, res) => {
 
 const loginStudent = async (req, res) => {
     try {
+        console.log(req.body.mail)
         const student = await Student.findOne({ mail: req.body.mail });
         if (!student || !(await student.comparePassword(req.body.password)))
             return res.status(400).json({ message: 'Invalid email or password' });
-        res.json({ message: 'Login successful', token: await student.generateToken() });
+        res.json({ message: 'Login successful',role:"student", token: await student.generateToken() });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

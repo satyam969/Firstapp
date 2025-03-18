@@ -69,7 +69,7 @@ const LoginInstitute = async (req, res) => {
         const institute = await Institute.findOne({ mail: req.body.mail });
         if (!institute || !(await institute.comparePassword(req.body.password)))
             return res.status(400).json({ message: 'Invalid email or password' });
-        res.json({ message: 'Login successful', token: await institute.generateToken() });
+        res.json({ message: 'Login successful',role:"institute", token: await institute.generateToken() });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
