@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, Image, Button } from 'react-native';
 import img from '../../assests/loginpage2.jpg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const user = {
     name: 'John Doe',
     email: 'john.doe@example.com',
@@ -16,6 +17,18 @@ const Profile = () => {
       { id: '4', name: 'Biology', score: 92, date: '2022-06-25' },
     ],
   };
+
+  const handleLogout=async()=>{
+    try {
+      await AsyncStorage.removeItem('authToken');
+      await AsyncStorage.removeItem('role')
+      
+      Alert.alert('Logged Out');
+      // use context api and setAuthenticated(false)
+    } catch (error) {
+      Alert.alert('Error logging out');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -36,7 +49,7 @@ const Profile = () => {
         <Text style={styles.info}>{user.bio}</Text>
       </View>
 
-      <Button title="Logout" color="#D32F2F" onPress={() => Alert.alert('Logged out')} />
+      <Button title="Logout" color="#D32F2F" onPress={() =>handleLogout()} />
 
       <Text style={styles.pastExamsTitle}>Past Exams</Text>
       <FlatList

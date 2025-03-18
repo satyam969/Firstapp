@@ -31,8 +31,10 @@ const App = () => {
         setUser('user');
         setRole(role);
 
-        if(token)
-        setAuthenticated(false);
+        console.log(token);
+
+        if(token)  
+        setAuthenticated(true); 
     
         //make call to store user details in redux and store refresh  tokein in asyncstorage
 

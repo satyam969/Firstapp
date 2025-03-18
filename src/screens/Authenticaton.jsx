@@ -30,7 +30,10 @@ const Authentication = ({navigation}) => {
           if (response?.ok) {
               await AsyncStorage.setItem('authToken', data.token); 
               await AsyncStorage.setItem('role',data.role);
-              // student
+              
+           
+
+
               console.log('Login successful!');
           } else {
               console.log("token not found");  
